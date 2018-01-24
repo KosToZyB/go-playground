@@ -1,7 +1,7 @@
 package main
 
 import (
-	"go-playground/001-logger-zap/handlers"
+	"go-playground/1-logger-zap/handlers"
 	"net/http"
 	"os"
 
