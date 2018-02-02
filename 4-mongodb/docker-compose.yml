@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+    client:
+        build: ./client
+        depends_on:
+            - mongodb
+        command: /go/client -serverdb=mongodb
+    mongodb:
+        build: ./mongodb
+        ports:
+            - "27017:27017"
