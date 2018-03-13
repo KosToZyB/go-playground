@@ -1,0 +1,24 @@
+version: '3.3'
+services:
+    node1:
+        image: "golang:latest"
+        command: go run -race /go/src/discovery-service/node/main.go
+            -consul consul:8500 -nodeID "FirstNode" -serviceName "Abstract-Service"
+        volumes:
+            - ./:/go/src/discovery-service
+        depends_on:
+            - consul
+    node2:
+        image: "golang:latest"
+        command: go run -race /go/src/discovery-service/node/main.go
+            -consul consul:8500 -nodeID "SecondNode" -serviceName "Abstract-Service"
+        volumes:
+            - ./:/go/src/discovery-service
+        depends_on:
+            - consul
+    consul:
+        image: "consul:1.0.6"
+        environment:
+            - 'CONSUL_LOCAL_CONFIG={"enable_script_checks": true}'
+        ports:
+          - "8500:8500"
